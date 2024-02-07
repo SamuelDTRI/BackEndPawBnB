@@ -35,6 +35,11 @@ module.exports = (sequelize) => {
         type: DataTypes.DATEONLY,
         allowNull: false,
       },
+      role: {
+        type: DataTypes.ENUM("owner", "dogSitter"),
+        defaultValue: "dogSitter",
+        allowNull: false,
+      },
       email: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -63,8 +68,7 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       availability: {
-        //disponibilidad
-        type: DataTypes.BOOLEAN,
+        type: DataTypes.ARRAY(DataTypes.DATEONLY),
         allowNull: true,
       },
       photos: {

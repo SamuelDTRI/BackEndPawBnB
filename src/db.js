@@ -41,21 +41,22 @@ const { Bookings, DogSitters, Dogs, Owners } = sequelize.models;
 
 //-------------------------------------------------------------------------------------------------
 // Owners And Dogs
-Owners.belongsToMany(Dogs, { through: "Owners_Dogs" });
-Dogs.belongsToMany(Owners, { through: "Owners_Dogs" });
+Owners.hasMany(Dogs, { foreignKey: "ownerId" });
+Dogs.belongsTo(Owners, { foreignKey: "ownerId" });
 
 //-------------------------------------------------------------------------------------------------
 // Owners And Bookings
-Owners.belongsToMany(Bookings, { through: "Owners_bookings" });
-Bookings.belongsToMany(Owners, { through: "Owners_Bookings" });
+Owners.hasMany(Bookings, { foreignKey: "ownerId" });
+Bookings.belongsTo(Owners, { foreignKey: "ownerId" });
 
 //-------------------------------------------------------------------------------------------------
 // Dogsitters And Bookings
-DogSitters.belongsToMany(Bookings, { through: "sitters_Bookings" });
-Bookings.belongsToMany(DogSitters, { through: "sitters_Bookings" });
+DogSitters.hasMany(Bookings, { foreignKey: "dogSitterId" });
+Bookings.belongsTo(DogSitters, { foreignKey: "dogSitterId" });
 
 //-------------------------------------------------------------------------------------------------
 // Owners Dogsitters Favorites
-// Owners.hasMany(Dogsitters, { foreignKey: "DogsittersId", as: "favorites" })
+Owners.belongsToMany(DogSitters, { through: "Favorites", as: "favorites" });
+DogSitters.belongsToMany(Owners, { through: "Favorites" });
 
 module.exports = { sequelize, Bookings, DogSitters, Dogs, Owners };
