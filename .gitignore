@@ -1,2 +1,6 @@
+#ignora los modulos
 node_modules
+#ignora el archivo .env
 .env
+#ignora la configuracion local de vs code
+.vscode
