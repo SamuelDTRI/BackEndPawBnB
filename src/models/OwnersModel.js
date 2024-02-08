@@ -6,8 +6,8 @@ module.exports = (sequelize) => {
     {
       id: {
         type: DataTypes.UUID,
-        allowNull: false,
         primaryKey: true,
+        defaultValue: DataTypes.UUIDV4,
       },
       name: {
         type: DataTypes.STRING,
@@ -38,8 +38,8 @@ module.exports = (sequelize) => {
         allowNull: true,
       },
       role: {
-        type: DataTypes.ENUM("owner", "dogSitter"),
-        defaultValue: "owner",
+        type: DataTypes.ENUM("Owner", "DogSitter"),
+        defaultValue: "Owner",
         allowNull: false,
       },
       phone: {

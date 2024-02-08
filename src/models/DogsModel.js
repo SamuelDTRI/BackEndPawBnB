@@ -7,16 +7,19 @@ module.exports = (sequelize) => {
       id: {
         type: DataTypes.UUID,
         primaryKey: true,
+        defaultValue: DataTypes.UUIDV4,
       },
       name: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      race: { //raza
+      race: {
+        //raza
         type: DataTypes.STRING,
         allowNull: false,
       },
-      gender: { //genero
+      gender: {
+        //genero
         type: DataTypes.ENUM("male", "female"),
         allowNull: false,
       },
@@ -24,27 +27,33 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      feedingInstructions: { //instrucciones de alimentacion
+      feedingInstructions: {
+        //instrucciones de alimentacion
         type: DataTypes.STRING,
         allowNull: false,
       },
-      allergies: { //alergias
+      allergies: {
+        //alergias
         type: DataTypes.STRING,
         allowNull: false,
       },
-      medicines: { //medicinas
+      medicines: {
+        //medicinas
         type: DataTypes.STRING,
         allowNull: true,
       },
-      medicalCondition: { //condicion medica
+      medicalCondition: {
+        //condicion medica
         type: DataTypes.STRING,
         allowNull: false,
       },
-      behavior: { //comportamiento
+      behavior: {
+        //comportamiento
         type: DataTypes.STRING,
         allowNull: false,
       },
-      vaccination: { //vacunacion
+      vaccination: {
+        //vacunacion
         type: DataTypes.STRING,
         allowNull: false,
       },
