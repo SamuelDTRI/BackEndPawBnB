@@ -7,6 +7,7 @@ module.exports = (sequelize) => {
       id: {
         type: DataTypes.UUID,
         primaryKey: true,
+        defaultValue: DataTypes.UUIDV4,
       },
       startDate: {
         type: DataTypes.STRING,
@@ -14,11 +15,11 @@ module.exports = (sequelize) => {
       },
       status: {
         type: DataTypes.ENUM(
-          "pending",
-          "approved",
-          "active",
-          "cancelled",
-          "completed"
+          "pendiente",
+          "aprobado",
+          "activo",
+          "cancelado",
+          "completado"
         ),
       },
       reviews: {
