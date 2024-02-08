@@ -19,7 +19,7 @@ module.exports = (sequelize) => {
       },
       zipcode: {
         type: DataTypes.INTEGER,
-        allowNull: true
+        allowNull: true,
       },
       city: {
         type: DataTypes.STRING,
@@ -37,6 +37,11 @@ module.exports = (sequelize) => {
         type: DataTypes.TEXT,
         allowNull: true,
       },
+      role: {
+        type: DataTypes.ENUM("owner", "dogSitter"),
+        defaultValue: "owner",
+        allowNull: false,
+      },
       phone: {
         type: DataTypes.INTEGER,
         allowNull: true,
@@ -44,7 +49,7 @@ module.exports = (sequelize) => {
       photo: {
         type: DataTypes.JSONB,
         allowNull: true,
-      }
+      },
     },
     { timestamps: false, freezeTableName: true }
   );
