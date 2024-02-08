@@ -2,7 +2,7 @@ const Locations = require("../models/Locations.js");
 const axios = require("axios");
 const { API_KEY_LOC, USER_ID_LOC } = process.env;
 
-const getLocations = async (req, res) => {
+const getLocations = async (req, res, next) => {
     try {
         // primero se verifica si hay datos en el modelo locations de la base de datos
         const existingLocations = await Locations.findAll();
@@ -39,18 +39,18 @@ const getLocations = async (req, res) => {
             };
             //con el listado generado se guardan los datos en la base de datos y se envía el listado como respuesta
             await Locations.bulkCreate(filteredLocationData);
-            return res.json({
+            return response= {
                 success: true,
                 message: "Ubicaciones obtenidas y guardadas correctamente",
                 locations: filteredLocationData,
-            });
+            };
         } else {
             //si hay datos guardados en la base de datos se los envía en la respuesta
-            return res.json({
+            return response = {
             success: true,
             message: "Ubicaciones existentes en la base de datos",
             locations: existingLocations,
-            });
+            };
         };
     } catch (error) {
         console.error("Error al obtener y guardar ubicaciones:", error);

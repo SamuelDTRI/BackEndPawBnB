@@ -1,6 +1,6 @@
 const { Router } = require("express");
 
-const  getLocations = require( "../controllers/locationsController.js");
+const  locationsHandler = require( "../handlers/locationsHandler.js");
 
 const mainRouter = Router();
 
@@ -8,6 +8,6 @@ mainRouter.get("/", (req, res) => {
   res.status(200).json("ok");
 });
 
-mainRouter.get("/locations", getLocations);
+mainRouter.get("/locations", locationsHandler);
 
 module.exports = { mainRouter };

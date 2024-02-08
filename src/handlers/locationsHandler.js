@@ -1,8 +1,8 @@
 const  getLocations = require( "../controllers/locationsController.js");
 
-const locationsHandler = async (req, res) => {
+const locationsHandler = async (req, res, next) => {
     try {
-        const { success, message, locations } = await getLocations(req, res);
+        const { success, message, locations } = await getLocations(req,res, next);
         if (success) {
             res.status(200).json({ message, locations });
         } else {
@@ -14,4 +14,4 @@ const locationsHandler = async (req, res) => {
     }
 };
 
-module.exports= {locationsHandler};
+module.exports= locationsHandler;
