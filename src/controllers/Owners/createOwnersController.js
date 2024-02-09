@@ -13,22 +13,23 @@ const createOwnersController = async (
   phone,
   photo}) => {
     if (!name || !surname || !email || !password) {
-      return res
-        .status(400)
-        .json({ message: "Por favor, complete todos los campos." });
+      return response= { 
+        success: false,
+        message: "Por favor, complete todos los campos." 
+      };
     }
-    const createOwners = await Owners.create({
-      name,
-      surName,
-      zipcode,
-      city,
-      email,
-      password,
-      address,
-      role,
-      phone,
-      photo,
-    });
+    // const createOwners = await Owners.create({
+    //   name,
+    //   surName,
+    //   zipcode,
+    //   city,
+    //   email,
+    //   password,
+    //   address,
+    //   role,
+    //   phone,
+    //   photo,
+    // });
 
     // let transporter = nodemailer.createTransport({
     //   service: "gmail",
