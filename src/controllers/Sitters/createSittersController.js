@@ -44,7 +44,7 @@ const createSitters = async (
   // Una vez aprobado el Owner y la contraseña, la encriptamos usando una función hash.
   const hashedPassword = await bcrypt.hash(password, 10);
   // Se crea el registro del Owner en la base de datos con los datos de la req y la contraseña hasheada.
-  const createdSitter = DogSitters.create({
+  const createdSitter = await DogSitters.create({
     name,
     surName,
     phone,
@@ -61,8 +61,9 @@ const createSitters = async (
     photos,
     pay,
   });
+  console.log(createdSitter)
   return (response = {
-    owner: createdSitter,
+    sitter: createdSitter,
     success: true,
     message: "Usuario registrado correctamente.",
   });

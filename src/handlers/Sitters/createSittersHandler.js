@@ -4,9 +4,9 @@ const {
 
 const createSittersHandler = async (req, res) => {
   try {
-    const { success, message, owner } = await createSitters(req.body);
+    const { success, message, sitter } = await createSitters(req.body);
     if (success) {
-      res.status(200).json({ message, owner });
+      res.status(200).json({ message, sitter });
     } else {
       res.status(400).json({ success, error: message });
     }
