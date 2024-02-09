@@ -88,7 +88,7 @@ const createOwnersController = async (
       owner: createOwners,
       success: true,
       message: "Usuario registrado correctamente.",
-    });;
+    });
 };
 
 module.exports = { createOwnersController };
