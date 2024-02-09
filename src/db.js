@@ -8,24 +8,24 @@ const LocationsModel = require("./models/LocationsModel.js")
 const { Sequelize } = require("sequelize");
 
 let sequelize =
-  process.env.NODE_ENV === "production"
-    ? new Sequelize({
-        database: "railway",
-        username: "postgres",
-        password: "bdaBGF66ffGg5ecB3**6B-Ag54EfAC4c",
-        host: "viaduct.proxy.rlwy.net",
-        port: 11376,
-        dialect: "postgres",
-        dialectOptions: {
-          ssl: {
-            require: true,
-            rejectUnauthorized: false,
-          },
-        },
-        logging: false,
-        native: false,
-      })
-    : new Sequelize(
+  // process.env.NODE_ENV === "production"
+  //   ? new Sequelize({
+  //       database: "railway",
+  //       username: "postgres",
+  //       password: "bdaBGF66ffGg5ecB3**6B-Ag54EfAC4c",
+  //       host: "viaduct.proxy.rlwy.net",
+  //       port: 11376,
+  //       dialect: "postgres",
+  //       dialectOptions: {
+  //         ssl: {
+  //           require: true,
+  //           rejectUnauthorized: false,
+  //         },
+  //       },
+  //       logging: false,
+  //       native: false,
+  //     }):
+    new Sequelize(
         `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`,
         {
           logging: false,

@@ -68,10 +68,10 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      // availability: {
-      //   type: DataTypes.ARRAY(DataTypes.DATEONLY),
-      //   allowNull: true,
-      // },
+      availability: {
+        type: DataTypes.ARRAY(DataTypes.DATEONLY),
+        allowNull: true,
+      },
       photos: {
         type: DataTypes.ARRAY(DataTypes.JSONB),
         allowNull: false,

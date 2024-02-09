@@ -6,7 +6,6 @@ const getLocations = async (req, res, next) => {
     try {
         // primero se verifica si hay datos en el modelo locations de la base de datos
         const existingLocations = await Locations.findAll();
-        console.log(existingLocations)
         if (existingLocations.length === 0) {
             //si esta vacío se hace una 1ª llamada a la api que trae un objeto que contiene un  listado de ubicaciones
             const apiResponse = await axios.get(
