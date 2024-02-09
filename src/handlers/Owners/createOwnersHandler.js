@@ -4,8 +4,7 @@ const {
 
 const createOwnersHandler = async (req,res) => {
   try {
-    const owner = await createOwnersController(req.body);
-    res.status(201).json(response);
+    const  {success, message, owner} = await createOwnersController(req.body);
     if (success) {
       res.status(200).json({ message, owner });
     } else {
