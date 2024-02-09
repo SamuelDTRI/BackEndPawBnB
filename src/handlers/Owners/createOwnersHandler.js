@@ -3,34 +3,18 @@ const {
 } = require("../../controllers/Owners/createOwnersController");
 
 const createOwnersHandler = async (req,res) => {
-  const {
-    name,
-    surName,
-    zipcode,
-    city,
-    email,
-    password,
-    address,
-    role,
-    phone,
-    photo,
-  } = req.body;
+
   try {
-    const response = await createOwnersController(
-      name,
-      surName,
-      zipcode,
-      city,
-      email,
-      password,
-      address,
-      role,
-      phone,
-      photo
-    );
+    const user = await createOwnersController(req.body);
     res.status(201).json(response);
+    if (success) {
+      res.status(200).json({ message, user });
+    } else {
+      res.status(500).json({ success, error: message });
+    }
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    console.error(error);
+    next(error);
   }
 };
 
