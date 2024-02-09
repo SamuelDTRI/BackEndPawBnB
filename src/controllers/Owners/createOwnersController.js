@@ -32,13 +32,14 @@ const createOwnersController = async (
         message: "La contraseña debe tener un mínimo de 5 caracteres y un máximo de 15.",
       });
     }
+    const hashedPassword = await bcrypt.hash(password, 10);
     const createOwners = await Owners.create({
       name,
       surName,
       zipcode,
       city,
       email,
-      password,
+      password : hashedPassword,
       address,
       role,
       phone,
