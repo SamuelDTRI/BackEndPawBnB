@@ -26,7 +26,7 @@ module.exports = (sequelize) => {
         allowNull: false,
         validate: {
           notEmpty: {
-            args: true, // Esto es para que la descripcion no este en blaco/vacio
+            args: true, // Esto es para que la descripción no este en blanco/vació
             msg: "Description cannot be empty",
           },
         },
@@ -50,12 +50,12 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       address: {
-        //direccion
+        //dirección
         type: DataTypes.STRING,
         allowNull: false,
       },
       zipcode: {
-        //codigo postal
+        //código postal
         type: DataTypes.STRING,
         allowNull: false,
       },
