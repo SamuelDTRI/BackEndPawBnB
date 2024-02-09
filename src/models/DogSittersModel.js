@@ -66,7 +66,7 @@ module.exports = (sequelize) => {
       rates: {
         //tarifas
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       availability: {
         type: DataTypes.ARRAY(DataTypes.DATEONLY),
@@ -74,11 +74,11 @@ module.exports = (sequelize) => {
       },
       photos: {
         type: DataTypes.ARRAY(DataTypes.JSONB),
-        allowNull: false,
+        allowNull: true,
       },
       pay: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
     },
     { timestamps: false, freezeTableName: true }
