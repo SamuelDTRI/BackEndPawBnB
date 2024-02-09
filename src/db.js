@@ -4,6 +4,7 @@ const BookingsModel = require("./models/BookingsModel");
 const DogSittersModel = require("./models/DogSittersModel");
 const DogsModel = require("./models/DogsModel");
 const OwnersModel = require("./models/OwnersModel");
+const LocationsModel = require("./models/LocationsModel.js")
 const { Sequelize } = require("sequelize");
 
 let sequelize =
@@ -37,7 +38,9 @@ DogSittersModel(sequelize);
 DogsModel(sequelize);
 OwnersModel(sequelize);
 
-const { Bookings, DogSitters, Dogs, Owners } = sequelize.models;
+LocationsModel(sequelize);
+
+const { Bookings, DogSitters, Dogs, Owners, Locations } = sequelize.models;
 
 //-------------------------------------------------------------------------------------------------
 // Owners And Dogs
@@ -59,4 +62,4 @@ Bookings.belongsTo(DogSitters, { foreignKey: "dogSitterId" });
 Owners.belongsToMany(DogSitters, { through: "Favorites", as: "favorites" });
 DogSitters.belongsToMany(Owners, { through: "Favorites" });
 
-module.exports = { sequelize, Bookings, DogSitters, Dogs, Owners };
+module.exports = { sequelize, Bookings, DogSitters, Dogs, Owners, Locations };
