@@ -3,12 +3,11 @@ const {
 } = require("../../controllers/Owners/createOwnersController");
 
 const createOwnersHandler = async (req,res) => {
-
   try {
-    const user = await createOwnersController(req.body);
+    const owner = await createOwnersController(req.body);
     res.status(201).json(response);
     if (success) {
-      res.status(200).json({ message, user });
+      res.status(200).json({ message, owner });
     } else {
       res.status(500).json({ success, error: message });
     }
