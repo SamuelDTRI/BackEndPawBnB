@@ -7,8 +7,12 @@ module.exports = (sequelize) => {
       id: {
         type: DataTypes.UUID,
         primaryKey: true,
-        defaultValue: DataTypes.UUIDV4, 
-      },      
+        defaultValue: DataTypes.UUIDV4,
+      },
+      photoProfile: {
+        type: DataTypes.ARRAY(DataTypes.JSONB),
+        allowNull: true,
+      },
       name: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -26,7 +30,7 @@ module.exports = (sequelize) => {
         allowNull: false,
         validate: {
           notEmpty: {
-            args: true, // Esto es para que la descripción no este en blanco/vació
+            args: true, // Esto es para que la descripcion no este en blaco/vacio
             msg: "Description cannot be empty",
           },
         },
@@ -50,37 +54,32 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       address: {
-        //dirección
+        //direccion
         type: DataTypes.STRING,
         allowNull: false,
       },
-      zipcode: {
-        //código postal
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      city: {
+      Neighborhood: {
         type: DataTypes.STRING,
         allowNull: true,
       },
       rates: {
-        //tarifas
         type: DataTypes.STRING,
-        allowNull: true,
-      },
-      availability: {
-        type: DataTypes.ARRAY(DataTypes.DATEONLY),
-        allowNull: true,
+        allowNull: false,
       },
       photos: {
         type: DataTypes.ARRAY(DataTypes.JSONB),
-        allowNull: true,
+        allowNull: false,
       },
       pay: {
         type: DataTypes.STRING,
-        allowNull: true,
+        allowNull: false,
+      },
+      deleted: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
       },
     },
     { timestamps: false, freezeTableName: true }
   );
 };
+

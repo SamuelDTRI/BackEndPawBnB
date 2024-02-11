@@ -24,7 +24,8 @@ let sequelize =
   //       },
   //       logging: false,
   //       native: false,
-  //     }):
+  //     })
+  //   : 
     new Sequelize(
         `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`,
         {
