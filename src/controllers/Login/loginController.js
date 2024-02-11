@@ -1,9 +1,8 @@
-const { DogSitters } = require("../../db");
+const { DogSitters, Owners } = require("../../db");
 const bcrypt = require("bcrypt");
 
 const loginUser = async ({ email, password }) => {
   // Verificar si los campos obligatorios están presentes
-    console.log(email, password)
     if (!email || !password) {
         return {
         success: false,
@@ -11,14 +10,18 @@ const loginUser = async ({ email, password }) => {
         };
     }
     try {
-        // Buscar al usuario en la base de datos
-        const findUser = await DogSitters.findOne({ where: { email } });
+        // Buscar al usuario en la base de datos en ambos modelos Owners y DogSitters.
+        let findUser = await DogSitters.findOne({ where: { email } });
         if (!findUser) {
-            return {
+            findUser = await Owners.findOne({ where: { email } });
+            if(!findUser){
+                return {
                 success: false,
                 message: "Correo electrónico no encontrado.",
-            };
+                };
+            }
         }
+        console.log(findUser)
         // Validar la contraseña
         // const validatePass = await bcrypt.compare(password, findUser.password);
         if (password !== findUser.password) {
