@@ -35,7 +35,7 @@ const createSitters = async (
       message: "Por favor, complete todos los campos.",
     });
   }
-  // Verificamos que el usuario no esta ya registrado como cuidador con el email que nos llega por req.
+  // Verificamos que el usuario no esta ya registrado como cliente con el email que nos llega por req.
   const existingOwner = await Owners.findOne({ where: { email } });
   if (existingOwner) {
     return (response = {
