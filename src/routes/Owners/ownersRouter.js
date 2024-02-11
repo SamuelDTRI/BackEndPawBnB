@@ -5,13 +5,14 @@ const {
 const {
   createOwnersHandler,
 } = require("../../handlers/Owners/createOwnersHandler");
+const { updateOwnerHandler } = require("../../handlers/Owners/updateOwnersHandler");
 
 const ownersRouter = Router();
 
 ownersRouter.get("/", getAllOwnersHandler);
 ownersRouter.get("/:id");
 ownersRouter.post("/", createOwnersHandler);
-ownersRouter.put("/");
+ownersRouter.put("/", updateOwnerHandler);
 ownersRouter.delete("/");
 
 module.exports = { ownersRouter };
