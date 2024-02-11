@@ -7,8 +7,12 @@ module.exports = (sequelize) => {
       id: {
         type: DataTypes.UUID,
         primaryKey: true,
-        defaultValue: DataTypes.UUIDV4, 
-      },      
+        defaultValue: DataTypes.UUIDV4,
+      },
+      photoProfile: {
+        type: DataTypes.ARRAY(DataTypes.JSONB),
+        allowNull: true,
+      },
       name: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -54,23 +58,13 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      zipcode: {
-        //codigo postal
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      city: {
+      Neighborhood: {
         type: DataTypes.STRING,
         allowNull: true,
       },
       rates: {
-        //tarifas
         type: DataTypes.STRING,
         allowNull: false,
-      },
-      availability: {
-        type: DataTypes.ARRAY(DataTypes.DATEONLY),
-        allowNull: true,
       },
       photos: {
         type: DataTypes.ARRAY(DataTypes.JSONB),
@@ -79,6 +73,10 @@ module.exports = (sequelize) => {
       pay: {
         type: DataTypes.STRING,
         allowNull: false,
+      },
+      deleted: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
       },
     },
     { timestamps: false, freezeTableName: true }
