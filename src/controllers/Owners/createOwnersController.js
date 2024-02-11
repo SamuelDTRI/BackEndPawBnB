@@ -36,7 +36,7 @@ const createOwnersController = async (
       });
     }
     // Una vez aprobado el Owner y la contraseña, la encriptamos usando una función hash.
-    const hashedPassword = await bcrypt.hash(password, 10);
+    // const hashedPassword = await bcrypt.hash(password, 10);
     // Se crea el registro del Owner en la base de datos con los datos de la req y la contraseña hasheada.
     const createOwners = await Owners.create({
       name,
@@ -44,7 +44,7 @@ const createOwnersController = async (
       zipcode,
       city,
       email,
-      password : hashedPassword,
+      password,
       address,
       role,
       phone,
