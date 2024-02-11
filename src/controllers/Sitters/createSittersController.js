@@ -1,4 +1,4 @@
-const { DogSitters } = require("../../db");
+const { DogSitters, Owners } = require("../../db");
 const bcrypt = require("bcrypt");
 
 const createSitters = async (
@@ -19,10 +19,28 @@ const createSitters = async (
   pay}
 ) => {
   // controlamos que los campos obligatorios en el modelo Owners estén presentes.
-  if (!name || !email || !password || !role || !phone || !description || !dateOfBirth || !address || !zipcode) {
+  if (
+    !name ||
+    !email ||
+    !password ||
+    !role ||
+    !phone ||
+    !description ||
+    !dateOfBirth ||
+    !address ||
+    !zipcode
+  ) {
     return (response = {
       success: false,
       message: "Por favor, complete todos los campos.",
+    });
+  }
+  // Verificamos que el usuario no esta ya registrado como cuidador con el email que nos llega por req.
+  const existingOwner = await Owners.findOne({ where: { email } });
+  if (existingOwner) {
+    return (response = {
+      success: false,
+      message: "Ya tines una cuenta registrada como cliente.",
     });
   }
   // Verificamos que no exista un Owner ya registrado con el email que nos llega por req.
@@ -61,7 +79,7 @@ const createSitters = async (
     photos,
     pay,
   });
-  console.log(createdSitter)
+  console.log(createdSitter);
   return (response = {
     sitter: createdSitter,
     success: true,

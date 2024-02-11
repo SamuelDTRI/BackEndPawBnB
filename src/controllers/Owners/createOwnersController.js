@@ -1,5 +1,5 @@
 const nodemailer = require("nodemailer");
-const { Owners } = require("../../db");
+const { Owners, DogSitters } = require("../../db");
 const bcrypt = require("bcrypt");
 
 const createOwnersController = async (
@@ -15,10 +15,18 @@ const createOwnersController = async (
   photo}) => {
     // controlamos que los campos obligatorios en el modelo Owners estén presentes.
     if (!name || !email || !password || !role) {
-      return response= { 
+      return (response = {
         success: false,
-        message: "Por favor, complete todos los campos." 
-      };
+        message: "Por favor, complete todos los campos.",
+      });
+    }
+    // Verificamos que el usuario no esta ya registrado como cuidador con el email que nos llega por req.
+    const existingSitter = await DogSitters.findOne({ where: { email } });
+    if (existingSitter) {
+      return (response = {
+        success: false,
+        message: "Ya tines una cuenta registrada como cuidador.",
+      });
     }
     // Verificamos que no exista un Owner ya registrado con el email que nos llega por req.
     const existingUser = await Owners.findOne({ where: { email } });
@@ -32,7 +40,8 @@ const createOwnersController = async (
     if (password.length < 5 || password.length > 25) {
       return (response = {
         success: false,
-        message: "La contraseña debe tener un mínimo de 5 caracteres y un máximo de 15.",
+        message:
+          "La contraseña debe tener un mínimo de 5 caracteres y un máximo de 15.",
       });
     }
     // Una vez aprobado el Owner y la contraseña, la encriptamos usando una función hash.
@@ -89,6 +98,6 @@ const createOwnersController = async (
       success: true,
       message: "Usuario registrado correctamente.",
     });
-};
+  };
 
 module.exports = { createOwnersController };
