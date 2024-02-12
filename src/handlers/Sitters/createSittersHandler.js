@@ -3,18 +3,12 @@ const {
 } = require("../../controllers/Sitters/createSittersController");
 
 const createSittersHandler = async (req, res) => {
+  const { name, surName, phone, email, password } = req.body;
   try {
-    const { success, message, sitter } = await createSitters(req.body);
-    if (success) {
-      res.status(200).json({ message, sitter });
-    } else {
-      res.status(400).json({ success, error: message });
-    }
+    const response = await createSitters(name, surName, phone, email, password);
+    res.status(201).json(response)
   } catch (error) {
-    console.error("Error al procesar el registro:", error);
-    return res.status(500).json({
-      message: "Se produjo un error al procesar el registro.",
-    });
+    res.status(404).json({ error: error.message });
   }
 };
 

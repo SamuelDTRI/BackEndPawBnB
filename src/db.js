@@ -4,7 +4,7 @@ const BookingsModel = require("./models/BookingsModel");
 const DogSittersModel = require("./models/DogSittersModel");
 const DogsModel = require("./models/DogsModel");
 const OwnersModel = require("./models/OwnersModel");
-const LocationsModel = require("./models/LocationsModel.js")
+const LocationsModel = require("./models/LocationsModel.js");
 const { Sequelize } = require("sequelize");
 
 let sequelize =
@@ -24,14 +24,12 @@ let sequelize =
   //       },
   //       logging: false,
   //       native: false,
-  //     }):
-    new Sequelize(
-        `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`,
-        {
-          logging: false,
-          native: false,
-        }
-      );
+  //     })
+  //   :
+  new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`, {
+    logging: false,
+    native: false,
+  });
 
 BookingsModel(sequelize);
 DogSittersModel(sequelize);
@@ -63,3 +61,10 @@ Owners.belongsToMany(DogSitters, { through: "Favorites", as: "favorites" });
 DogSitters.belongsToMany(Owners, { through: "Favorites" });
 
 module.exports = { sequelize, Bookings, DogSitters, Dogs, Owners, Locations };
+
+
+
+//aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa   que es peor, dormir en antartida o perder el pf
+
+// const URL_LOCAL= "htt://localhost:3000/owners"
+// const URL_DEPLOY= "https://backendpawbnb-production.up.railway.app/"
