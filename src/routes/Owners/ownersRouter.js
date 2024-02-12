@@ -5,8 +5,18 @@ const {
 const {
   createOwnersHandler,
 } = require("../../handlers/Owners/createOwnersHandler");
-const { updateOwnerHandler } = require("../../handlers/Owners/updateOwnersHandler");
-const { getOwnerByIdHandler } = require("../../handlers/Owners/getOwnerByIdHandler");
+const {
+  updateOwnerHandler,
+} = require("../../handlers/Owners/updateOwnersHandler");
+const {
+  getOwnerByIdHandler,
+} = require("../../handlers/Owners/getOwnerByIdHandler");
+const {
+  updateDeletedOwnersHandler,
+} = require("../../handlers/Owners/updateDeletedOwnersHandler");
+const {
+  deleteOwnersHandler,
+} = require("../../handlers/Owners/deleteOwnersHandler");
 
 const ownersRouter = Router();
 
@@ -14,6 +24,7 @@ ownersRouter.get("/", getAllOwnersHandler);
 ownersRouter.get("/:id", getOwnerByIdHandler);
 ownersRouter.post("/", createOwnersHandler);
 ownersRouter.put("/", updateOwnerHandler);
-ownersRouter.delete("/");
+ownersRouter.put("/:id/deleted", updateDeletedOwnersHandler);
+ownersRouter.delete("/:id", deleteOwnersHandler);
 
 module.exports = { ownersRouter };
