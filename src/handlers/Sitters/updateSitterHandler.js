@@ -1,12 +1,17 @@
 const { updateSitter} = require("../../controllers/Sitters/updateSitterController.js");
 
 const updateSitterHandler = async (req, res) => {
+    const { id } = req.params;
+    
+    console.log("Datos recibidos en la solicitud:", req.body); 
+    console.log("ID del sitter a actualizar:", id); 
     try {
-        const { success, message, updatedSitter } = await updateSitter(req.body);
+        const { success, message, updatedSitter } = await updateSitter({ id, ...req.body });
+        console.log("Resultado de la actualización:", { success, message, updatedSitter })
         if (success) {
-            res.status(200).json({ message, updatedSitter });
+            res.status(200).json({ success:true, message: "¡El sitter se actualizó correctamente!", updatedSitter });
         } else {
-            res.status(400).json({ success, error: message });
+            res.status(400).json({ success: false, error: message });
         }
     } catch (error) {
         console.error("Error al procesar la solicitud:", error);
@@ -16,4 +21,4 @@ const updateSitterHandler = async (req, res) => {
     }
 };
 
-module.exports = { updateSitterHandler };
+module.exports = { updateSitterHandler }; 
