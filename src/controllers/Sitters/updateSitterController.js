@@ -1,4 +1,6 @@
+require("dotenv").config();
 const { DogSitters } = require("../../db");
+const cloudinary = require("../../../cloudinary");
 
 const updateSitter = async ({
   id,
@@ -13,13 +15,18 @@ const updateSitter = async ({
   neighborhood,
   city,
   rates,
+  photos,
+  photoProfile
 }) => {
+  console.log("Datos recibidos en updateSitter:", { id, name, surName, phone, description, dateOfBirth, email, password, address, neighborhood, city, rates })
+  
   // verificamos que llega un valor id.
   if (!id) {
     throw new Error("No se encontro un sitter con ese id");
   }
   // verificamos que exista un usuario que corresponda a esa id
   const findSitter = await DogSitters.findOne({ where: { id } });
+  console.log("Sitter encontrado en la base de datos:", findSitter); // Agregar este log
   if (!findSitter) {
     throw new Error("No coincide el id con un sitter");
   }
@@ -36,6 +43,8 @@ const updateSitter = async ({
       address ||
       neighborhood ||
       city ||
+      photos ||
+      photoProfile ||
       rates
     )
   ) {
@@ -43,26 +52,52 @@ const updateSitter = async ({
       "Por favor, especifica la información que deseas actualizar."
     );
   }
+
+  const updatedFields = {
+    name: name || findSitter.name,
+    surName: surName || findSitter.surName,
+    phone: phone || findSitter.phone,
+    description: description || findSitter.description,
+    dateOfBirth: dateOfBirth || findSitter.dateOfBirth,
+    email: email || findSitter.email,
+    password: password || findSitter.password,
+    address: address || findSitter.address,
+    neighborhood: neighborhood || findSitter.neighborhood,
+    city: city || findSitter.city,
+    rates: rates || findSitter.rates,
+    photoProfile: findSitter.photoProfile,
+    photos: findSitter.photos
+  }
+
   // actualizamos la información en la base de datos
-  const updatedSitter = await DogSitters.update(
-    {
-      name: name ? name : findSitter.name,
-      surName: surName ? surName : findSitter.surName,
-      phone: phone ? phone : findSitter.phone,
-      description: description ? description : findSitter.description,
-      dateOfBirth: dateOfBirth ? dateOfBirth : findSitter.dateOfBirth,
-      email: email ? email : findSitter.email,
-      password: password ? password : findSitter.password,
-      address: address ? address : findSitter.address,
-      neighborhood: neighborhood ? neighborhood : findSitter.neighborhood,
-      rates: rates ? rates : findSitter.rates,
-      city: city ? city : findSitter.city,
-    },
-    {
-      where: { id },
-    }
-  );
-  return updateSitter;
+
+  // Si existe photoProfile:
+  if(photoProfile){
+    //Se sube la img a cloudinary y te devuelve la url unicamente
+    const uploadedProfileImg = await cloudinary.uploader.upload(photoProfile, {
+      upload_preset: "PawBnB_Profile",
+      public_id: `${name}_imgProfile`, 
+      allowed_formats: ['png', 'jpg', 'jpeg', 'svg', 'ico', 'jfif', 'webp']
+    });
+    
+    updatedFields.photoProfile = [...findSitter.photoProfile, uploadedProfileImg.secure_url];
+  };
+
+  // Si existe photos se subira a cloudinary
+  if(photos){
+    const uploadedGallery = await cloudinary.uploader.upload(photos, {
+      upload_preset: "PawBnB_Gallery",
+      public_id: `${name}_Gallery`, 
+      allowed_formats: ['png', 'jpg', 'jpeg', 'svg', 'ico', 'jfif', 'webp']
+    });
+    updatedFields.photos = [...findSitter.photos, uploadedGallery.secure_url];
+  };
+
+  // Actualizar el cuidador en la base de datos
+  const updatedSitter = await DogSitters.update(updatedFields, { where: { id } });
+  console.log("Cuidador actualizado:", updatedSitter);
+  return updatedSitter;
+
 };
 
 module.exports = { updateSitter };
