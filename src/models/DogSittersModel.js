@@ -9,17 +9,17 @@ module.exports = (sequelize) => {
         primaryKey: true,
         defaultValue: DataTypes.UUIDV4,
       },
-      photoProfile: {
-        type: DataTypes.ARRAY(DataTypes.JSONB),
-        allowNull: true,
-      },
       name: {
         type: DataTypes.STRING,
         allowNull: false,
       },
+      photoProfile: {
+        type: DataTypes.ARRAY(DataTypes.JSONB),
+        allowNull: true,
+      },
       surName: {
         type: DataTypes.STRING,
-        allowNull: true,
+        allowNull: false,
       },
       phone: {
         type: DataTypes.INTEGER,
@@ -27,7 +27,7 @@ module.exports = (sequelize) => {
       },
       description: {
         type: DataTypes.TEXT,
-        allowNull: false,
+        allowNull: true,
         validate: {
           notEmpty: {
             args: true, // Esto es para que la descripcion no este en blaco/vacio
@@ -36,9 +36,8 @@ module.exports = (sequelize) => {
         },
       },
       dateOfBirth: {
-        //fecha de nacimiento
-        type: DataTypes.DATEONLY,
-        allowNull: false,
+        type: DataTypes.STRING,
+        allowNull: true,
       },
       role: {
         type: DataTypes.ENUM("Owner", "DogSitter"),
@@ -56,23 +55,27 @@ module.exports = (sequelize) => {
       address: {
         //direccion
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
-      Neighborhood: {
+      neighborhood: {
         type: DataTypes.STRING,
         allowNull: true,
       },
+      city: {
+        type: DataTypes.STRING,
+        defaultValue: "CABA"
+      },
       rates: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       photos: {
         type: DataTypes.ARRAY(DataTypes.JSONB),
-        allowNull: false,
+        allowNull: true,
       },
       pay: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       deleted: {
         type: DataTypes.BOOLEAN,
