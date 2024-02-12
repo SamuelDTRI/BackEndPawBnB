@@ -15,9 +15,9 @@ module.exports = (sequelize) => {
       },
       surName: {
         type: DataTypes.STRING,
-        allowNull: true,
+        allowNull: false,
       },
-      Neighborhood: {
+      neighborhood: {
         type: DataTypes.STRING,
         allowNull: true,
       },
@@ -40,7 +40,7 @@ module.exports = (sequelize) => {
       },
       phone: {
         type: DataTypes.INTEGER,
-        allowNull: true,
+        allowNull: false,
       },
       photo: {
         type: DataTypes.JSONB,
