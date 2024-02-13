@@ -53,50 +53,163 @@ const updateSitter = async ({
     );
   }
 
-  const updatedFields = {
-    name: name || findSitter.name,
-    surName: surName || findSitter.surName,
-    phone: phone || findSitter.phone,
-    description: description || findSitter.description,
-    dateOfBirth: dateOfBirth || findSitter.dateOfBirth,
-    email: email || findSitter.email,
-    password: password || findSitter.password,
-    address: address || findSitter.address,
-    neighborhood: neighborhood || findSitter.neighborhood,
-    city: city || findSitter.city,
-    rates: rates || findSitter.rates,
-    photoProfile: findSitter.photoProfile,
-    photos: findSitter.photos
-  }
-
-  // actualizamos la información en la base de datos
-
-  // Si existe photoProfile:
-  if(photoProfile){
+ 
+  // Si existe photos:
+  if(photos && !photoProfile){
     //Se sube la img a cloudinary y te devuelve la url unicamente
-    const uploadedProfileImg = await cloudinary.uploader.upload(photoProfile, {
+    const uploadedGallery = await cloudinary.uploader.upload(photos, {
+      upload_preset: "PawBnB_Gallery",
+      public_id: `${name}_imgProfile`, 
+      allowed_formats: ['png', 'jpg', 'jpeg', 'svg', 'ico', 'jfif', 'webp']
+    });
+
+    const saveURL = uploadedGallery.secure_url;
+
+    const updateGallery = {
+      name: name || findSitter.name,
+      surName: surName || findSitter.surName,
+      phone: phone || findSitter.phone,
+      description: description || findSitter.description,
+      dateOfBirth: dateOfBirth || findSitter.dateOfBirth,
+      email: email || findSitter.email,
+      password: password || findSitter.password,
+      address: address || findSitter.address,
+      neighborhood: neighborhood || findSitter.neighborhood,
+      city: city || findSitter.city,
+      rates: rates || findSitter.rates,
+      photoProfile: findSitter.photoProfile,
+      photos: findSitter.photos
+    }
+
+    if (updateGallery.photos.length >= 0){
+      updateGallery.photos.push(saveURL);
+    } else{
+      updateGallery.photos = [uploadedGallery.secure_ur];
+    }
+    
+    const updateSitterGallery = await DogSitters.update(updateGallery, { where: { id } });
+    console.log("Cuidador actualizado:", updateSitterGallery);
+
+    return updateSitterGallery;
+    
+  };
+
+  
+  // Si existe photos:
+  if(photoProfile && !photos){
+    //Se sube la img a cloudinary y te devuelve la url unicamente
+    const uploadedPhoto = await cloudinary.uploader.upload(photos, {
       upload_preset: "PawBnB_Profile",
       public_id: `${name}_imgProfile`, 
       allowed_formats: ['png', 'jpg', 'jpeg', 'svg', 'ico', 'jfif', 'webp']
     });
+
+    const saveURL = uploadedPhoto.secure_url;
+
+    const updatePhotoProfile = {
+      name: name || findSitter.name,
+      surName: surName || findSitter.surName,
+      phone: phone || findSitter.phone,
+      description: description || findSitter.description,
+      dateOfBirth: dateOfBirth || findSitter.dateOfBirth,
+      email: email || findSitter.email,
+      password: password || findSitter.password,
+      address: address || findSitter.address,
+      neighborhood: neighborhood || findSitter.neighborhood,
+      city: city || findSitter.city,
+      rates: rates || findSitter.rates,
+      photoProfile: findSitter.photoProfile,
+      photos: findSitter.photos
+    }
+
+    if (updatePhotoProfile.photoProfile.length >= 0){
+      updatePhotoProfile.photoProfile.push(saveURL);
+    } else{
+      updatePhotoProfile.photoProfile = [uploadedPhoto.secure_ur];
+    }
     
-    updatedFields.photoProfile = [...findSitter.photoProfile, uploadedProfileImg.secure_url];
+    const updateSitterPhoto = await DogSitters.update(updatePhotoProfile, { where: { id } });
+    console.log("Cuidador actualizado:", updateSitterPhoto);
+
+    return updateSitterPhoto;
+    
   };
 
-  // Si existe photos se subira a cloudinary
-  if(photos){
-    const uploadedGallery = await cloudinary.uploader.upload(photos, {
-      upload_preset: "PawBnB_Gallery",
-      public_id: `${name}_Gallery`, 
+  if(photoProfile && photos){
+    //Se sube la img a cloudinary y te devuelve la url unicamente
+    const uploadedPhoto = await cloudinary.uploader.upload(photos, {
+      upload_preset: "PawBnB_Profile",
+      public_id: `${name}_imgProfile`, 
       allowed_formats: ['png', 'jpg', 'jpeg', 'svg', 'ico', 'jfif', 'webp']
     });
-    updatedFields.photos = [...findSitter.photos, uploadedGallery.secure_url];
+
+    const saveURL = uploadedPhoto.secure_url;
+
+    const uploadedGallery = await cloudinary.uploader.upload(photos, {
+      upload_preset: "PawBnB_Gallery",
+      public_id: `${name}_imgProfile`, 
+      allowed_formats: ['png', 'jpg', 'jpeg', 'svg', 'ico', 'jfif', 'webp']
+    });
+
+    const saveURLGallery = uploadedGallery.secure_url;
+
+    const updatePhotoProfile = {
+      name: name || findSitter.name,
+      surName: surName || findSitter.surName,
+      phone: phone || findSitter.phone,
+      description: description || findSitter.description,
+      dateOfBirth: dateOfBirth || findSitter.dateOfBirth,
+      email: email || findSitter.email,
+      password: password || findSitter.password,
+      address: address || findSitter.address,
+      neighborhood: neighborhood || findSitter.neighborhood,
+      city: city || findSitter.city,
+      rates: rates || findSitter.rates,
+      photoProfile: findSitter.photoProfile,
+      photos: findSitter.photos
+    }
+
+    if (updatePhotoProfile.photoProfile.length >= 0){
+      updatePhotoProfile.photoProfile.push(saveURL);
+    } else{
+      updatePhotoProfile.photoProfile = [uploadedPhoto.secure_ur];
+    }
+
+    if (updateGallery.photos.length >= 0){
+      updateGallery.photos.push(saveURLGallery);
+    } else{
+      updateGallery.photos = [uploadedGallery.secure_ur];
+    }
+    
+    
+    const updateSitterPhoto = await DogSitters.update(updatePhotoProfile, { where: { id } });
+    console.log("Cuidador actualizado:", updateSitterPhoto);
+
+    return updateSitterPhoto;
+    
   };
 
-  // Actualizar el cuidador en la base de datos
-  const updatedSitter = await DogSitters.update(updatedFields, { where: { id } });
-  console.log("Cuidador actualizado:", updatedSitter);
-  return updatedSitter;
+  const updateSitter = {
+      name: name || findSitter.name,
+      surName: surName || findSitter.surName,
+      phone: phone || findSitter.phone,
+      description: description || findSitter.description,
+      dateOfBirth: dateOfBirth || findSitter.dateOfBirth,
+      email: email || findSitter.email,
+      password: password || findSitter.password,
+      address: address || findSitter.address,
+      neighborhood: neighborhood || findSitter.neighborhood,
+      city: city || findSitter.city,
+      rates: rates || findSitter.rates,
+      photoProfile: findSitter.photoProfile,
+      photos: findSitter.photos
+    }
+
+  const updateSitterValues = await DogSitters.update(updateSitter, { where: { id } });
+  console.log("Cuidador actualizado:", updateSitterValues);
+
+  return updateSitterValues;
+
 
 };
 
