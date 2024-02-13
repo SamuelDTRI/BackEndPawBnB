@@ -22,7 +22,7 @@ const updateSitter = async ({
   
   // verificamos que llega un valor id.
   if (!id) {
-    throw new Error("No se encontro un sitter con ese id");
+    throw new Error("No se encontró un sitter con ese id");
   }
   // verificamos que exista un usuario que corresponda a esa id
   const findSitter = await DogSitters.findOne({ where: { id } });
@@ -83,7 +83,7 @@ const updateSitter = async ({
     updatedFields.photoProfile = [...findSitter.photoProfile, uploadedProfileImg.secure_url];
   };
 
-  // Si existe photos se subira a cloudinary
+  // Si existe photos se subirá a cloudinary
   if(photos){
     const uploadedGallery = await cloudinary.uploader.upload(photos, {
       upload_preset: "PawBnB_Gallery",

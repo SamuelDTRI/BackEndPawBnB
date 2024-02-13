@@ -5,12 +5,12 @@ const {
 const checkRegistrationHandler = async (req, res) => {
     try {
         const { email } = req.query;
-        const{ exist, userId, userRole}  = await checkRegistration(email);
-        console.log(exist, userId, userRole)
+        const{ exist, checkId, checkRole}  = await checkRegistration(email);
+        console.log(exist, checkId, checkRole)
         if(exist){
-            res.status(200).json({ exist, userId, userRole });
+            res.status(200).json({ exist, checkId, checkRole });
         } else {
-            res.status(200).json({ exist, userId, userRole });
+            res.status(200).json({ exist, checkId, checkRole });
         }
     } catch (error) {
         console.error(

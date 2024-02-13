@@ -13,15 +13,15 @@ const checkRegistration = async (email) => {
             console.log("userExist")
             return {
                 exist: true,
-                userId: user.dataValues.id,
-                userRole: user.dataValues.role
+                checkId: user.dataValues.id,
+                checkRole: user.dataValues.role
             };
         } else {
             console.log("userNotExist")
             return {
                 exist: false,
-                userId: null,
-                userRole: null,
+                checkId: null,
+                checkRole: null,
             };
         }
     } catch (error) {
