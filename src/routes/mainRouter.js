@@ -5,7 +5,8 @@ const { dogsRouter } = require("./Dogs/dogsRouter");
 const { bookingsRouter } = require("./Bookings/bookingsRouter");
 const { locationsRouter } = require("./Locations/locationsRouter.js");
 const { loginRouter } = require("./Login/loginRoutes.js");
-const { checkRegistrationRouter} = require("./CheckRegistration/checkRegistrationRouter.js")
+const { checkRegistrationRouter} = require("./CheckRegistration/checkRegistrationRouter.js");
+const { paymentRouter } = require("./Payment/paymentRouter.js");
 
 const mainRouter = Router();
 
@@ -13,6 +14,7 @@ mainRouter.get("/", (req, res) => {
   res.status(200).json("ok");
 });
 
+mainRouter.use("/payment", paymentRouter)
 mainRouter.use("/owners", ownersRouter);
 mainRouter.use("/sitters", sittersRouter);
 mainRouter.use("/dogs", dogsRouter);
