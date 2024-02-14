@@ -23,7 +23,7 @@ const ownersRouter = Router();
 ownersRouter.get("/", getAllOwnersHandler);
 ownersRouter.get("/:id", getOwnerByIdHandler);
 ownersRouter.post("/", createOwnersHandler);
-ownersRouter.put("/", updateOwnerHandler);
+ownersRouter.put("/:id", updateOwnerHandler);
 ownersRouter.put("/:id/deleted", updateDeletedOwnersHandler);
 ownersRouter.delete("/:id", deleteOwnersHandler);
 
