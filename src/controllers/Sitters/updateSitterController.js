@@ -16,10 +16,23 @@ const updateSitter = async ({
   city,
   rates,
   photos,
-  photoProfile
+  photoProfile,
 }) => {
-  console.log("Datos recibidos en updateSitter:", { id, name, surName, phone, description, dateOfBirth, email, password, address, neighborhood, city, rates })
-  
+  console.log("Datos recibidos en updateSitter:", {
+    id,
+    name,
+    surName,
+    phone,
+    description,
+    dateOfBirth,
+    email,
+    password,
+    address,
+    neighborhood,
+    city,
+    rates,
+  });
+
   // verificamos que llega un valor id.
   if (!id) {
     throw new Error("No se encontró un sitter con ese id");
@@ -66,38 +79,50 @@ const updateSitter = async ({
     city: city || findSitter.city,
     rates: rates || findSitter.rates,
     photoProfile: findSitter.photoProfile,
-    photos: findSitter.photos
-  }
-
-  // actualizamos la información en la base de datos
+    photos: findSitter.photos,
+  };
 
   // Si existe photoProfile:
-  if(photoProfile){
-    //Se sube la img a cloudinary y te devuelve la url unicamente
+  if (photoProfile) {
     const uploadedProfileImg = await cloudinary.uploader.upload(photoProfile, {
       upload_preset: "PawBnB_Profile",
-      public_id: `${name}_imgProfile`, 
-      allowed_formats: ['png', 'jpg', 'jpeg', 'svg', 'ico', 'jfif', 'webp']
+      public_id: `${name}_imgProfile`,
+      allowed_formats: ["png", "jpg", "jpeg", "svg", "ico", "jfif", "webp"],
     });
-    
-    updatedFields.photoProfile = [...findSitter.photoProfile, uploadedProfileImg.secure_url];
-  };
+    //const profileurl = uploadedProfileImg.secure_url;
 
-  // Si existe photos se subirá a cloudinary
-  if(photos){
+    // const imgsArray = findSitter.photoProfile || [];
+    // const addIndex = imgsArray.length;
+
+    // const updatePhotoIndex = [...imgsArray, {index: addIndex, url: profileurl}];
+
+    updatedFields.photoProfile = [uploadedProfileImg.secure_url];
+  }
+
+  // Si existe photos
+  if (photos) {
     const uploadedGallery = await cloudinary.uploader.upload(photos, {
       upload_preset: "PawBnB_Gallery",
-      public_id: `${name}_Gallery`, 
-      allowed_formats: ['png', 'jpg', 'jpeg', 'svg', 'ico', 'jfif', 'webp']
+      public_id: `${name}_Gallery`,
+      allowed_formats: ["png", "jpg", "jpeg", "svg", "ico", "jfif", "webp"],
     });
-    updatedFields.photos = [...findSitter.photos, uploadedGallery.secure_url];
-  };
+
+    const galleryURL = uploadedGallery.secure_url;
+
+    const imgsArray = findSitter.photos || [];
+    //const addIndex = imgsArray.length;
+
+    const updatePhotosIndex = [...imgsArray, { original: galleryURL }];
+
+    updatedFields.photos = updatePhotosIndex;
+  }
 
   // Actualizar el cuidador en la base de datos
-  const updatedSitter = await DogSitters.update(updatedFields, { where: { id } });
+  const updatedSitter = await DogSitters.update(updatedFields, {
+    where: { id },
+  });
   console.log("Cuidador actualizado:", updatedSitter);
   return updatedSitter;
-
 };
 
 module.exports = { updateSitter };
