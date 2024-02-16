@@ -3,8 +3,9 @@ const {
     } = require("../../controllers/Owners/updateOwnersController.js");
 
     const updateOwnerHandler = async (req, res) => {
+    const { id } = req.params;
     try {
-        const { success, message, updatedOwner } = await updateOwner(req.body);
+        const { success, message, updatedOwner } = await updateOwner({id,...req.body,});
         if (success) {
         res.status(200).json({ message, updatedOwner });
         } else {
@@ -12,9 +13,7 @@ const {
         }
     } catch (error) {
         console.error("Error al procesar la solicitud:", error);
-        return res.status(500).json({
-        message: "Se produjo un error al procesar la solicitud.",
-        });
+        res.status(404).json({ error: error.message });
     }
 };
 

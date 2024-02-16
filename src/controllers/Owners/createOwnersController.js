@@ -10,7 +10,7 @@ const createOwnersController = async (
   password
 ) => {
   // controlamos que los campos obligatorios en el modelo Owners estén presentes.
-  if (!name || !surName || !phone || !email || !password) {
+  if ( !email ) {
     throw new Error("Por favor, complete todos los campos.");
   }
   // Verificamos que el usuario no esta ya registrado como cuidador con el email que nos llega por req.

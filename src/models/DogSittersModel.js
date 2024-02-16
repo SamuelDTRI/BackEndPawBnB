@@ -11,7 +11,7 @@ module.exports = (sequelize) => {
       },
       name: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       photoProfile: {
         type: DataTypes.ARRAY(DataTypes.JSONB),
@@ -19,18 +19,18 @@ module.exports = (sequelize) => {
       },
       surName: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       phone: {
         type: DataTypes.STRING, //! LO CAMBIA A STRING DE INTERGER
-        allowNull: false,
+        allowNull: true,
       },
       description: {
         type: DataTypes.TEXT,
         allowNull: true,
         validate: {
           notEmpty: {
-            args: true, // Esto es para que la descripcion no este en blaco/vacio
+            args: true, // Esto es para que la descripción no este en blanco/vació
             msg: "Description cannot be empty",
           },
         },
@@ -50,10 +50,10 @@ module.exports = (sequelize) => {
       },
       password: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       address: {
-        //direccion
+        //dirección
         type: DataTypes.STRING,
         allowNull: true,
       },

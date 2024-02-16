@@ -22,7 +22,7 @@ const updateSitter = async ({
   
   // verificamos que llega un valor id.
   if (!id) {
-    throw new Error("No se encontró un sitter con ese id");
+    throw new Error("Por favor, proporciona un ID válido.");
   }
   // verificamos que exista un usuario que corresponda a esa id
   const findSitter = await DogSitters.findOne({ where: { id } });
