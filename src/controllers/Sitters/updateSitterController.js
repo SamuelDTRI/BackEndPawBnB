@@ -75,8 +75,9 @@ const updateSitter = async ({
       upload_preset: "PawBnB_Profile",
       public_id: `${name}_imgProfile`, 
       allowed_formats: ['png', 'jpg', 'jpeg', 'svg', 'ico', 'jfif', 'webp']
-    });
-    const profileurl = uploadedProfileImg.secure_url
+    }); 
+    const profileurl = uploadedProfileImg.secure_url;
+
     const imgsArray = findSitter.photoProfile || [];
     const addIndex = imgsArray.length;
 
