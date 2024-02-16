@@ -75,14 +75,9 @@ const updateSitter = async ({
       upload_preset: "PawBnB_Profile",
       public_id: `${name}_imgProfile`, 
       allowed_formats: ['png', 'jpg', 'jpeg', 'svg', 'ico', 'jfif', 'webp']
-    }); 
-    const profileurl = uploadedProfileImg.secure_url;
-
-    const imgsArray = findSitter.photoProfile || [];
-    const addIndex = imgsArray.length;
-
-    const updatePhotoIndex = [...imgsArray, {index: addIndex, url: profileurl}];
-    updatedFields.photoProfile = updatePhotoIndex;
+    });
+    
+    updatedFields.photoProfile = [uploadedProfileImg.secure_url];
   };
   
   // Si existe photos 
@@ -101,7 +96,6 @@ const updateSitter = async ({
     const updatePhotosIndex = [...imgsArray, {index: addIndex, url: galleryURL}];
 
     updatedFields.photos = updatePhotosIndex;
-
 
   };
 
