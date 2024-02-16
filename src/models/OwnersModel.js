@@ -11,11 +11,11 @@ module.exports = (sequelize) => {
       },
       name: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       surName: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       neighborhood: {
         type: DataTypes.STRING,
@@ -27,7 +27,7 @@ module.exports = (sequelize) => {
       },
       password: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       address: {
         type: DataTypes.TEXT,
@@ -40,7 +40,7 @@ module.exports = (sequelize) => {
       },
       phone: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
       },
       photo: {
         type: DataTypes.JSONB,
