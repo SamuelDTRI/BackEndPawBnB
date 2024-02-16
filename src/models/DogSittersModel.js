@@ -14,7 +14,7 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       photoProfile: {
-        type: DataTypes.ARRAY(DataTypes.JSONB),
+        type: DataTypes.ARRAY(DataTypes.JSON),
         allowNull: true,
       },
       surName: {
@@ -70,7 +70,7 @@ module.exports = (sequelize) => {
         allowNull: true,
       },
       photos: {
-        type: DataTypes.ARRAY(DataTypes.JSONB),
+        type: DataTypes.ARRAY(DataTypes.JSON),
         allowNull: true,
       },
       pay: {

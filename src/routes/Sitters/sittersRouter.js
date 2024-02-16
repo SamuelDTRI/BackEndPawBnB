@@ -17,6 +17,10 @@ const {
 const {
   deleteSittersHandler,
 } = require("../../handlers/Sitters/deleteSittersHandler");
+const { 
+  deletePhotoHandler 
+} = require("../../handlers/Sitters/deletePhotoHanlder");
+
 
 const sittersRouter = Router();
 
@@ -26,6 +30,9 @@ sittersRouter.post("/", createSittersHandler);
 sittersRouter.put("/:id", updateSitterHandler);
 sittersRouter.put("/deleted/:id", updateDeletedSittersHandler);
 sittersRouter.delete("/:id", deleteSittersHandler);
+
+// Nueva ruta para eliminar una foto específica del cuidador
+sittersRouter.delete("/:id/photos/:index", deletePhotoHandler);
 
 module.exports = { sittersRouter };
 
