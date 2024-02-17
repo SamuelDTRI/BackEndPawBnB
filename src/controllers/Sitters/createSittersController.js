@@ -3,8 +3,8 @@ const bcrypt = require("bcrypt");
 
 const createSitters = async (name, surName, phone, email, password) => {
   // controlamos que los campos obligatorios en el modelo Owners estén presentes.
-  if (!name || !surName || !phone || !email || !password) {
-    throw new Error("Envia la informacion completa por favor");
+  if ( !email ) {
+    throw new Error("Envía la información completa por favor");
   }
   // Verificamos que el usuario no esta ya registrado como cliente con el email que nos llega por req.
   const existingOwner = await Owners.findOne({ where: { email } });
@@ -15,7 +15,7 @@ const createSitters = async (name, surName, phone, email, password) => {
   const existingUser = await DogSitters.findOne({ where: { email } });
   if (existingUser) {
     throw new Error(
-      "Ya existe un usuario registrado con este correo electrónico."
+      "Ya existe una cuenta registrada como cuidador."
     );
   }
   // Una vez aprobado el Owner y la contraseña, la encriptamos usando una función hash.
@@ -28,7 +28,6 @@ const createSitters = async (name, surName, phone, email, password) => {
     email,
     password,
   });
-  console.log(createdSitter);
   return createdSitter;
 };
 

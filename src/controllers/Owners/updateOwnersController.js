@@ -8,10 +8,12 @@ const updateOwner = async ({
     city,
     email,
     address,
-    role,
+     role,
+    neighborhood,
     phone,
     photo,
 }) => {
+     
   // verificamos que llega un valor id.
     if (!id) {
         return (response = {
@@ -36,7 +38,8 @@ const updateOwner = async ({
         city ||
         email ||
         address ||
-        role ||
+        neighborhood ||
+         role ||
         phone ||
         photo
         )
@@ -58,6 +61,7 @@ const updateOwner = async ({
             role: role ? role : findOwner.role,
             phone: phone ? phone : findOwner.phone,
             photo: photo ? photo : findOwner.photo,
+            neighborhood: neighborhood ? neighborhood: findOwner.neighborhood
         },
         {
             where: { id },
