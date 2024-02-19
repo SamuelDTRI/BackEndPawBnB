@@ -1,6 +1,7 @@
 const {adminLogin} = require("../../controllers/Admin/adminLoginController.js")
 
 const adminLoginHandler = async (req, res) => {
+    console.log(req.body)
     try {
         const { success, message, userId, userRole, userDeleted } = await adminLogin(req.body);
         if (success) {
