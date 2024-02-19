@@ -2,13 +2,16 @@ const nodemailer = require("nodemailer");
 const { Owners, DogSitters } = require("../../db");
 const bcrypt = require("bcrypt");
 
-const createOwnersController = async (
+const createOwnersController = async ({
   name,
   surName,
   phone,
   email,
-  password
-) => {
+  password,
+  role
+}) => {
+  console.log(name,surName,phone,email,password,role)
+  console.log("YO TAMPOCO FUI")
   // controlamos que los campos obligatorios en el modelo Owners estén presentes.
   if ( !email ) {
     throw new Error("Por favor, complete todos los campos.");
@@ -28,13 +31,17 @@ const createOwnersController = async (
   // Una vez aprobado el Owner y la contraseña, la encriptamos usando una función hash.
   // const hashedPassword = await bcrypt.hash(password, 10);
   // Se crea el registro del Owner en la base de datos con los datos de la req y la contraseña hasheada.
+  console.log("HASTA ACA YO NO FUI E")
+  console.log(name,surName,phone,email,password,role)
   const createOwners = await Owners.create({
     name,
     surName,
     phone,
     email,
     password,
+    role
   });
+  console.log("CHE YA ESTOY EN EL FINAL")
   // Implementamos la funcionalidad de notificación por email del registro del usuario.
   let transporter = nodemailer.createTransport({
     service: "gmail",

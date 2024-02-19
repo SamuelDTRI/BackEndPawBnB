@@ -33,13 +33,12 @@ module.exports = (sequelize) => {
         type: DataTypes.TEXT,
         allowNull: true,
       },
-      role: {
-        type: DataTypes.ENUM("Owner", "DogSitter"),
-        defaultValue: "Owner",
+      role: {     
+         type: DataTypes.STRING,
         allowNull: false,
       },
       phone: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: true,
       },
       photo: {
