@@ -1,35 +1,49 @@
-const nodemailer = require("nodemailer");
+/* const nodemailer = require("nodemailer"); */
 const { Dogs, Owners } = require("../../db");
 
 const createDogsController = async (
   name,
-  race,
+  breed,
+  dateOfBirth,
   gender,
   description,
   feedingInstructions,
   allergies,
-  medicines,
+  medication,
   medicalCondition,
-  behavior,
   vaccination,
+  behavior,
   ownerId
 ) => {
-  const createDogs = await Dogs.create({
-    name,
-    race,
-    gender,
-    description,
-    feedingInstructions,
-    allergies,
-    medicines,
-    medicalCondition,
-    behavior,
-    vaccination,
-    ownerId,
-  });
+  try {
+    const createdDog = await Dogs.create({
+      name,
+      breed,
+      dateOfBirth,
+      gender,
+      description,
+      feedingInstructions,
+      allergies,
+      medication,
+      medicalCondition,
+      vaccination,
+      behavior,
+      ownerId,
+    });
 
-  const owner = await Owners.findByPk(ownerId);
+    const owner = await Owners.findByPk(ownerId);
+    if (owner) {
+      await owner.addDog(createdDog);
+    }
+    return createdDog;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
 
+module.exports = { createDogsController };
+
+/* 
   let transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
@@ -62,9 +76,4 @@ const createDogsController = async (
     } else {
       console.log("Email enviado: " + info.response);
     }
-  });
-
-  return createDogs;
-};
-
-module.exports = { createDogsController };
+  }); */
