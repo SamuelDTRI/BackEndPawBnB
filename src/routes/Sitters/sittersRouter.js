@@ -24,7 +24,7 @@ sittersRouter.get("/", getAllSittersHandler);
 sittersRouter.get("/:id", getSitterByIdHandler);
 sittersRouter.post("/", createSittersHandler);
 sittersRouter.put("/:id", updateSitterHandler);
-sittersRouter.put("/deleted/:id", updateDeletedSittersHandler);
+sittersRouter.put("/delete/:id", updateDeletedSittersHandler);
 sittersRouter.delete("/:id", deleteSittersHandler);
 
 module.exports = { sittersRouter };
