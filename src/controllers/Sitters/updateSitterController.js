@@ -98,7 +98,7 @@ const updateSitter = async ({
 
   };
 
-  // Actualizar el cuidador en la base de datos
+  // Actualizar el cuidador en la bdd
   const updatedSitter = await DogSitters.update(updatedFields, { where: { id } });
   console.log("Cuidador actualizado:", updatedSitter);
   return updatedSitter;
