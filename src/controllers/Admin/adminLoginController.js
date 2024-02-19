@@ -17,7 +17,6 @@ const adminLogin = async ({ email, password }) => {
           message: "Correo electrónico no encontrado.",
         };
     }
-    console.log(findUser);
     // Validar la contraseña
     // const validatePass = await bcrypt.compare(password, findUser.password);
     if (password !== findUser.password) {
