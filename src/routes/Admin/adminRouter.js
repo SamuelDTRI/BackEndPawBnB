@@ -5,7 +5,7 @@ const {adminLoginHandler} = require("../../handlers/Admin/adminLoginHandler.js")
 const adminRouter = Router();
 
 adminRouter.post("/", createAdminHandler);
-adminRouter.get("/login", adminLoginHandler)
+adminRouter.post("/login", adminLoginHandler)
 
 
 module.exports = { adminRouter };
