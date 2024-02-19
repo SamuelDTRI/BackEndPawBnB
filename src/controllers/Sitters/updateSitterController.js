@@ -69,31 +69,37 @@ const updateSitter = async ({
     photos: findSitter.photos
   }
 
-  // actualizamos la información en la base de datos
-
   // Si existe photoProfile:
   if(photoProfile){
-    //Se sube la img a cloudinary y te devuelve la url unicamente
     const uploadedProfileImg = await cloudinary.uploader.upload(photoProfile, {
       upload_preset: "PawBnB_Profile",
       public_id: `${name}_imgProfile`, 
       allowed_formats: ['png', 'jpg', 'jpeg', 'svg', 'ico', 'jfif', 'webp']
     });
-    
-    updatedFields.photoProfile = [...findSitter.photoProfile, uploadedProfileImg.secure_url];
+    updatedFields.photoProfile = uploadedProfileImg.secure_url;
   };
-
-  // Si existe photos se subirá a cloudinary
+  
+  // Si existe photos 
   if(photos){
     const uploadedGallery = await cloudinary.uploader.upload(photos, {
       upload_preset: "PawBnB_Gallery",
       public_id: `${name}_Gallery`, 
       allowed_formats: ['png', 'jpg', 'jpeg', 'svg', 'ico', 'jfif', 'webp']
     });
-    updatedFields.photos = [...findSitter.photos, uploadedGallery.secure_url];
+
+    const galleryURL = uploadedGallery.secure_url;
+    console.log(galleryURL)
+
+    const imgsArray = findSitter.photos;
+    const addIndex = imgsArray.length;
+
+    const updatePhotosIndex = [...imgsArray, {index: addIndex, url: galleryURL}];
+
+    updatedFields.photos = updatePhotosIndex;
+
   };
 
-  // Actualizar el cuidador en la base de datos
+  // Actualizar el cuidador en la bdd
   const updatedSitter = await DogSitters.update(updatedFields, { where: { id } });
   console.log("Cuidador actualizado:", updatedSitter);
   return updatedSitter;

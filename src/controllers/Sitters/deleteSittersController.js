@@ -5,7 +5,7 @@ const deleteSittersController = async (id) => {
 
   if (!deleteSitters) {
     throw new Error("No existe un sitter con ese id");
-  }
+  };
 
   deleteSitters.destroy();
   return deleteSitters;
