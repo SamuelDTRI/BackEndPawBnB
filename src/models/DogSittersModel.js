@@ -14,7 +14,7 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       photoProfile: {
-        type: DataTypes.ARRAY(DataTypes.JSON),
+        type: DataTypes.STRING,
         allowNull: true,
       },
       surName: {

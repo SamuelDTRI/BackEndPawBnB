@@ -27,6 +27,7 @@ const createSitters = async (name, surName, phone, email, password) => {
     phone,
     email,
     password,
+    photos: []
   });
   console.log(createdSitter);
   return createdSitter;

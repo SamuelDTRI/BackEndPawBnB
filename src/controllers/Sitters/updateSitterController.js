@@ -76,8 +76,7 @@ const updateSitter = async ({
       public_id: `${name}_imgProfile`, 
       allowed_formats: ['png', 'jpg', 'jpeg', 'svg', 'ico', 'jfif', 'webp']
     });
-    
-    updatedFields.photoProfile = [uploadedProfileImg.secure_url];
+    updatedFields.photoProfile = uploadedProfileImg.secure_url;
   };
   
   // Si existe photos 
@@ -90,7 +89,7 @@ const updateSitter = async ({
 
     const galleryURL = uploadedGallery.secure_url;
 
-    const imgsArray = findSitter.photos || [];
+    const imgsArray = findSitter.photos;
     const addIndex = imgsArray.length;
 
     const updatePhotosIndex = [...imgsArray, {index: addIndex, url: galleryURL}];
