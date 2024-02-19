@@ -38,6 +38,7 @@ const loginUser = async ({ email, password }) => {
             message: "Inicio de sesión exitoso.",
             userId: findUser.dataValues.id,
             userRole: findUser.dataValues.role,
+            userDeleted: findUser.dataValues.deleted,
         };
     } catch (error) {
         console.error("Error al procesar el inicio de sesión:", error);

@@ -2,9 +2,9 @@ const { loginUser } = require("../../controllers/Login/loginController.js");
 
 const loginUserHandler = async (req, res) => {
     try {
-        const { success, message, userId, userRole } = await loginUser(req.body);
+        const { success, message, userId, userRole, userDeleted } = await loginUser(req.body);
         if (success) {
-            res.status(200).json({ message, userId, userRole });
+            res.status(200).json({ message, userId, userRole, userDeleted });
             } else {
             res.status(401).json({ success, error: message });
         }

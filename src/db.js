@@ -6,6 +6,7 @@ const DogsModel = require("./models/DogsModel");
 const OwnersModel = require("./models/OwnersModel");
 const LocationsModel = require("./models/LocationsModel.js");
 const { Sequelize } = require("sequelize");
+const AdminModel = require("./models/AdminModel.js");
 
 let sequelize =
   // process.env.NODE_ENV === "production"
@@ -37,8 +38,9 @@ DogsModel(sequelize);
 OwnersModel(sequelize);
 
 LocationsModel(sequelize);
+AdminModel(sequelize)
 
-const { Bookings, DogSitters, Dogs, Owners, Locations } = sequelize.models;
+const { Bookings, DogSitters, Dogs, Owners, Locations, Admin } = sequelize.models;
 
 //-------------------------------------------------------------------------------------------------
 // Owners And Dogs
@@ -60,7 +62,7 @@ Bookings.belongsTo(DogSitters, { foreignKey: "dogSitterId" });
 Owners.belongsToMany(DogSitters, { through: "Favorites", as: "favorites" });
 DogSitters.belongsToMany(Owners, { through: "Favorites" });
 
-module.exports = { sequelize, Bookings, DogSitters, Dogs, Owners, Locations };
+module.exports = { sequelize, Bookings, DogSitters, Dogs, Owners, Locations, Admin };
 
 
 

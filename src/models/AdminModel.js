@@ -2,7 +2,7 @@ const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
   sequelize.define(
-    "Owners",
+    "Admin",
     {
       id: {
         type: DataTypes.UUID,
@@ -17,10 +17,6 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: true,
       },
-      neighborhood: {
-        type: DataTypes.STRING,
-        allowNull: true,
-      },
       email: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -29,13 +25,9 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: true,
       },
-      address: {
-        type: DataTypes.TEXT,
-        allowNull: true,
-      },
       role: {
-        type: DataTypes.ENUM("Owner", "DogSitter"),
-        defaultValue: "Owner",
+        type: DataTypes.ENUM("Admin"),
+        defaultValue: "Admin",
         allowNull: false,
       },
       phone: {
