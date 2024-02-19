@@ -5,29 +5,31 @@ const {
 const createDogsHandler = async (req, res) => {
   const {
     name,
-    race,
+    breed,
+    dateOfBirth,
     gender,
     description,
     feedingInstructions,
     allergies,
-    medicines,
+    medication,
     medicalCondition,
-    behavior,
     vaccination,
-    ownerId
+    behavior,
+    ownerId,
   } = req.body;
   try {
     const response = await createDogsController(
       name,
-      race,
+      breed,
       gender,
+      dateOfBirth,
       description,
       feedingInstructions,
       allergies,
-      medicines,
+      medication,
       medicalCondition,
-      behavior,
       vaccination,
+      behavior,
       ownerId
     );
     res.status(201).json(response);

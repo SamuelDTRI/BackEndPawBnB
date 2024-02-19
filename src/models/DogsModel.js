@@ -13,23 +13,27 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      race: {
+      breed: {
         //raza
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      dateOfBirth: {
         type: DataTypes.STRING,
         allowNull: false,
       },
       gender: {
         //genero
-        type: DataTypes.ENUM("male", "female"),
+        type: DataTypes.STRING,
         allowNull: false,
       },
       description: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         allowNull: false,
       },
       feedingInstructions: {
         //instrucciones de alimentacion
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         allowNull: false,
       },
       allergies: {
@@ -37,24 +41,24 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      medicines: {
+      medication: {
         //medicinas
         type: DataTypes.STRING,
-        allowNull: true,
+        allowNull: false,
       },
       medicalCondition: {
         //condicion medica
         type: DataTypes.STRING,
         allowNull: false,
       },
-      behavior: {
-        //comportamiento
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
       vaccination: {
         //vacunacion
         type: DataTypes.STRING,
+        allowNull: false,
+      },
+      behavior: {
+        //comportamiento
+        type: DataTypes.TEXT,
         allowNull: false,
       },
       deleted: {
