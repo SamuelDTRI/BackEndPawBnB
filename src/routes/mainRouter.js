@@ -1,4 +1,3 @@
-const { Router } = require("express");
 const { ownersRouter } = require("./Owners/ownersRouter");
 const { sittersRouter } = require("./Sitters/sittersRouter");
 const { dogsRouter } = require("./Dogs/dogsRouter");
@@ -7,6 +6,7 @@ const { locationsRouter } = require("./Locations/locationsRouter.js");
 const { loginRouter } = require("./Login/loginRoutes.js");
 const { checkRegistrationRouter} = require("./CheckRegistration/checkRegistrationRouter.js");
 const { paymentRouter } = require("./Payment/paymentRouter.js");
+const { Router } = require("express");
 
 const mainRouter = Router();
 
