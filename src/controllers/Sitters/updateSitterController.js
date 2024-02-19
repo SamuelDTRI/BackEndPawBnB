@@ -88,6 +88,7 @@ const updateSitter = async ({
     });
 
     const galleryURL = uploadedGallery.secure_url;
+    console.log(galleryURL)
 
     const imgsArray = findSitter.photos;
     const addIndex = imgsArray.length;
