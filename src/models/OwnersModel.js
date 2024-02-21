@@ -6,22 +6,18 @@ module.exports = (sequelize) => {
     {
       id: {
         type: DataTypes.UUID,
-        allowNull: false,
         primaryKey: true,
+        defaultValue: DataTypes.UUIDV4,
       },
       name: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       surName: {
         type: DataTypes.STRING,
         allowNull: true,
       },
-      zipcode: {
-        type: DataTypes.INTEGER,
-        allowNull: true
-      },
-      city: {
+      neighborhood: {
         type: DataTypes.STRING,
         allowNull: true,
       },
@@ -31,20 +27,28 @@ module.exports = (sequelize) => {
       },
       password: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       address: {
         type: DataTypes.TEXT,
         allowNull: true,
       },
+      role: {     
+         type: DataTypes.STRING,
+        allowNull: false,
+      },
       phone: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: true,
       },
       photo: {
         type: DataTypes.JSONB,
         allowNull: true,
-      }
+      },
+      deleted: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+      },
     },
     { timestamps: false, freezeTableName: true }
   );

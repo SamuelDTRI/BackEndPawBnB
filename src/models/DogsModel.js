@@ -7,46 +7,63 @@ module.exports = (sequelize) => {
       id: {
         type: DataTypes.UUID,
         primaryKey: true,
+        defaultValue: DataTypes.UUIDV4,
       },
       name: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      race: { //raza
+      breed: {
+        //raza
         type: DataTypes.STRING,
         allowNull: false,
       },
-      gender: { //genero
-        type: DataTypes.ENUM("male", "female"),
+      dateOfBirth: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      gender: {
+        //genero
+        type: DataTypes.STRING,
         allowNull: false,
       },
       description: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+      },
+      feedingInstructions: {
+        //instrucciones de alimentacion
+        type: DataTypes.TEXT,
+        allowNull: false,
+      },
+      allergies: {
+        //alergias
         type: DataTypes.STRING,
         allowNull: false,
       },
-      feedingInstructions: { //instrucciones de alimentacion
+      medication: {
+        //medicinas
         type: DataTypes.STRING,
         allowNull: false,
       },
-      allergies: { //alergias
+      medicalCondition: {
+        //condicion medica
         type: DataTypes.STRING,
         allowNull: false,
       },
-      medicines: { //medicinas
-        type: DataTypes.STRING,
-        allowNull: true,
-      },
-      medicalCondition: { //condicion medica
+      vaccination: {
+        //vacunacion
         type: DataTypes.STRING,
         allowNull: false,
       },
-      behavior: { //comportamiento
-        type: DataTypes.STRING,
+      behavior: {
+        //comportamiento
+        type: DataTypes.TEXT,
         allowNull: false,
       },
-      vaccination: { //vacunacion
-        type: DataTypes.STRING,
-        allowNull: false,
+      deleted: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
       },
     },
     { timestamps: false, freezeTableName: true }

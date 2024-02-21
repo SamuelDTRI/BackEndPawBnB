@@ -7,32 +7,41 @@ module.exports = (sequelize) => {
       id: {
         type: DataTypes.UUID,
         primaryKey: true,
+        defaultValue: DataTypes.UUIDV4,
       },
       name: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
+      },
+      photoProfile: {
+        type: DataTypes.STRING,
+        allowNull: true,
       },
       surName: {
         type: DataTypes.STRING,
         allowNull: true,
       },
       phone: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
+        type: DataTypes.STRING, //! LO CAMBIA A STRING DE INTERGER
+        allowNull: true,
       },
       description: {
         type: DataTypes.TEXT,
-        allowNull: false,
+        allowNull: true,
         validate: {
           notEmpty: {
-            args: true, // Esto es para que la descripcion no este en blaco/vacio
+            args: true, // Esto es para que la descripción no este en blanco/vació
             msg: "Description cannot be empty",
           },
         },
       },
       dateOfBirth: {
-        //fecha de nacimiento
-        type: DataTypes.DATEONLY,
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      role: {
+        type: DataTypes.ENUM("Owner", "DogSitter"),
+        defaultValue: "DogSitter",
         allowNull: false,
       },
       email: {
@@ -41,41 +50,39 @@ module.exports = (sequelize) => {
       },
       password: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       address: {
-        //direccion
+        //dirección
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
-      zipcode: {
-        //codigo postal
+      neighborhood: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       city: {
         type: DataTypes.STRING,
-        allowNull: true,
+        defaultValue: "CABA"
       },
       rates: {
-        //tarifas
         type: DataTypes.STRING,
-        allowNull: false,
-      },
-      availability: {
-        //disponibilidad
-        type: DataTypes.BOOLEAN,
         allowNull: true,
       },
       photos: {
-        type: DataTypes.ARRAY(DataTypes.JSONB),
-        allowNull: false,
+        type: DataTypes.ARRAY(DataTypes.JSON),
+        allowNull: true,
       },
       pay: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
+      },
+      deleted: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
       },
     },
     { timestamps: false, freezeTableName: true }
   );
 };
+
