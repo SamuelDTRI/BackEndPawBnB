@@ -9,24 +9,24 @@ const { Sequelize } = require("sequelize");
 const AdminModel = require("./models/AdminModel.js");
 
 let sequelize =
-  // process.env.NODE_ENV === "production"
-  //   ? new Sequelize({
-  //       database: "railway",
-  //       username: "postgres",
-  //       password: "bdaBGF66ffGg5ecB3**6B-Ag54EfAC4c",
-  //       host: "viaduct.proxy.rlwy.net",
-  //       port: 11376,
-  //       dialect: "postgres",
-  //       dialectOptions: {
-  //         ssl: {
-  //           require: true,
-  //           rejectUnauthorized: false,
-  //         },
-  //       },
-  //       logging: false,
-  //       native: false,
-  //     })
-  //   :
+  process.env.NODE_ENV === "production"
+    ? new Sequelize({
+        database: "railway",
+        username: "postgres",
+        password: "bdaBGF66ffGg5ecB3**6B-Ag54EfAC4c",
+        host: "viaduct.proxy.rlwy.net",
+        port: 11376,
+        dialect: "postgres",
+        dialectOptions: {
+          ssl: {
+            require: true,
+            rejectUnauthorized: false,
+          },
+        },
+        logging: false,
+        native: false,
+      })
+    :
   new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`, {
     logging: false,
     native: false,
@@ -61,6 +61,11 @@ Bookings.belongsTo(DogSitters, { foreignKey: "dogSitterId" });
 // Owners Dogsitters Favorites
 Owners.belongsToMany(DogSitters, { through: "Favorites", as: "favorites" });
 DogSitters.belongsToMany(Owners, { through: "Favorites" });
+
+// Bookings And Dogs
+Bookings.belongsTo(Dogs, { foreignKey: "dogId" });
+Dogs.hasMany(Bookings, { foreignKey: "dogId" });
+
 
 module.exports = { sequelize, Bookings, DogSitters, Dogs, Owners, Locations, Admin };
 

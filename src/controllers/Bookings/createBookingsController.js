@@ -2,24 +2,30 @@ const nodemailer = require("nodemailer");
 const { Bookings, Owners, DogSitters, Dogs } = require("../../db");
 
 const createBookingsController = async (
-  startDate,
-  status,
-  reviews,
+  status, //s
+  reviews, 
   rating,
   ownerId,
+  dogId,
   dogSitterId,
-  dogId
+  dateCheckIn,
+  dateCheckOut,
+  entryTime,
+  note
 ) => {
+  console.log(dogSitterId)
   const createBookings = await Bookings.create({
-    startDate,
     status,
     reviews,
     rating,
     ownerId,
     dogSitterId,
     dogId,
+    dateCheckIn,
+    dateCheckOut,
+    entryTime,
+    note
   });
-
   const owner = await Owners.findByPk(ownerId);
   if (!owner) {
     throw new Error(`No se encontró ningún dueño con el id ${ownerId}`);
