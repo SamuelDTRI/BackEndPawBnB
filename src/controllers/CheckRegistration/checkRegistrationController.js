@@ -14,7 +14,8 @@ const checkRegistration = async (email) => {
             return {
                 exist: true,
                 checkId: user.dataValues.id,
-                checkRole: user.dataValues.role
+                checkRole: user.dataValues.role,
+                checkDeleted: user.dataValues.deleted
             };
         } else {
             console.log("userNotExist")
@@ -22,6 +23,7 @@ const checkRegistration = async (email) => {
                 exist: false,
                 checkId: null,
                 checkRole: null,
+                checkDeleted: null
             };
         }
     } catch (error) {
