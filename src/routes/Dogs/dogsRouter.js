@@ -8,6 +8,9 @@ const {
   updateDeletedDogsHandler,
 } = require("../../handlers/Dogs/updateDeletedDogsHandler");
 const { deleteDogsHandler } = require("../../handlers/Dogs/deleteDogsHandler");
+const {
+  updateInfoDogsHandler,
+} = require("../../handlers/Dogs/updateInfoDogsHandler");
 
 const dogsRouter = Router();
 
@@ -24,6 +27,7 @@ dogsRouter.post("/", createDogsHandler); //crear dogs
 //"behavior": "pasiva, tranquila, super sencilla y cariñosa",
 //"vaccination": "tiene todas las vacunas al dia",
 //"ownerId": "63b65671-2622-4b59-a2e0-c788a7f8ac06" }
+dogsRouter.put("/:id", updateInfoDogsHandler); // actualizacion de datos de perro.
 dogsRouter.put("/deleted/:id", updateDeletedDogsHandler); //borrado logico
 //PUT:http://localhost:3000/dogs/deleted/e10f3e35-3770-4f36-a1d1-561dd6ef9d08
 //BODY: { "deleted": true }
