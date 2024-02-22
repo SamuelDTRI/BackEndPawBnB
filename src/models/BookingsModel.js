@@ -11,7 +11,7 @@ module.exports = (sequelize) => {
       },
       startDate: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       status: {
         type: DataTypes.ENUM(
@@ -24,16 +24,48 @@ module.exports = (sequelize) => {
       },
       reviews: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       rating: {
         type: DataTypes.ENUM("1", "2", "3", "4", "5"),
-        allowNull: false,
+        allowNull: true,
       },
       deleted: {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
       },
+      dateCheckIn:{
+        type: DataTypes.DATE,
+        allowNull: true
+      },
+      dateCheckOut: {
+        type: DataTypes.DATE,
+        allowNull: true
+      },
+      entryTime: {
+        type: DataTypes.TIME,
+        allowNull: true
+      },
+      reservationsFor: {
+        type: DataTypes.UUID,
+        allowNull: true
+      },
+      note: {
+        type: DataTypes.TEXT,
+        allowNull: true
+      },
+      dogId: {
+        type: DataTypes.UUID,
+        allowNull: false
+      },
+      dogSitterId: {
+        type: DataTypes.UUID,
+        allowNull: false
+      },
+      ownerId: {
+        type: DataTypes.UUID,
+        allowNull: false
+      }     
     },
     { timestamps: false, freezeTableName: true }
   );

@@ -1,7 +1,7 @@
-const { Owners, Bookings } = require("../../db");
+const { Owners, Dogs } = require("../../db");
 
 const getOwnerById = async (id) => {
-  const existingOwner = await Owners.findByPk(id);
+  const existingOwner = await Owners.findByPk(id, { include: Dogs });
   if (!existingOwner) {
     throw error(`No existe un owner con este id: ${id}`);
   }

@@ -4,8 +4,8 @@ const nodemailer = require("nodemailer");
 const createDogsController = async (
   name,
   breed,
-  dateOfBirth,
   gender,
+  dateOfBirth,
   description,
   feedingInstructions,
   allergies,
@@ -19,8 +19,8 @@ const createDogsController = async (
     const createdDog = await Dogs.create({
       name,
       breed,
-      dateOfBirth,
       gender,
+      dateOfBirth,
       description,
       feedingInstructions,
       allergies,
