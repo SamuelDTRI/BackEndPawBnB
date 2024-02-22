@@ -62,6 +62,11 @@ Bookings.belongsTo(DogSitters, { foreignKey: "dogSitterId" });
 Owners.belongsToMany(DogSitters, { through: "Favorites", as: "favorites" });
 DogSitters.belongsToMany(Owners, { through: "Favorites" });
 
+// Bookings And Dogs
+Bookings.belongsTo(Dogs, { foreignKey: "dogId" });
+Dogs.hasMany(Bookings, { foreignKey: "dogId" });
+
+
 module.exports = { sequelize, Bookings, DogSitters, Dogs, Owners, Locations, Admin };
 
 
