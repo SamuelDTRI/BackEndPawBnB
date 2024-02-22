@@ -12,10 +12,10 @@ const adminLogin = async ({ email, password }) => {
     // Buscar al usuario en la base de datos en ambos modelos Owners y DogSitters.
     let findUser = await Admin.findOne({ where: { email } });
     if (!findUser) {
-        return {
-          success: false,
-          message: "Correo electrónico no encontrado.",
-        };
+      return {
+        success: false,
+        message: "Correo electrónico no encontrado.",
+      };
     }
     // Validar la contraseña
     // const validatePass = await bcrypt.compare(password, findUser.password);
