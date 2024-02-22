@@ -26,6 +26,9 @@ const createBookingsController = async (
     entryTime,
     note
   });
+
+  console.log({ createBookings });
+
   const owner = await Owners.findByPk(ownerId);
   if (!owner) {
     throw new Error(`No se encontró ningún dueño con el id ${ownerId}`);
