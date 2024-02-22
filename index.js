@@ -7,7 +7,6 @@ console.log(
   sequelize instanceof require("sequelize")
 );
 
-
 sequelize.sync({ force: false }).then(
 
   server.listen(process.env.PORT || 3000, () => {
