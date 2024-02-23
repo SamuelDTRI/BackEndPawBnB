@@ -65,7 +65,12 @@ module.exports = (sequelize) => {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
       },
+    ownerId: {
+      type: DataTypes.UUID,
+      allowNull: true
+    }
     },
+    
     { timestamps: false, freezeTableName: true }
   );
 };
