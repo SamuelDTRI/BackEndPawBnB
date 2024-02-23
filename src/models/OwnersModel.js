@@ -21,6 +21,11 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: true,
       },
+      city: {
+        type: DataTypes.STRING,
+        defaultValue: "CABA",
+        allowNull: true
+      },
       email: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -33,8 +38,9 @@ module.exports = (sequelize) => {
         type: DataTypes.TEXT,
         allowNull: true,
       },
-      role: {     
-         type: DataTypes.STRING,
+      role: {
+        type: DataTypes.ENUM("Owner", "DogSitter"),
+        defaultValue: "Owner",
         allowNull: false,
       },
       phone: {

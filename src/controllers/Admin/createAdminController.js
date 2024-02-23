@@ -1,12 +1,6 @@
-const {Admin} = require("../../db.js")
+const { Admin } = require("../../db.js");
 
-const createAdminController = async (
-  name,
-  surName,
-  phone,
-  email,
-  password
-) => {
+const createAdminController = async (name, surName, phone, email, password) => {
   // controlamos que los campos obligatorios en el modelo Owners estén presentes.
   if (!email) {
     throw new Error("Por favor, complete todos los campos.");
