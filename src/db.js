@@ -7,6 +7,7 @@ const OwnersModel = require("./models/OwnersModel");
 const LocationsModel = require("./models/LocationsModel.js");
 const { Sequelize } = require("sequelize");
 const AdminModel = require("./models/AdminModel.js");
+const ReviewsModel = require('./models/ReviewsModel.js');
 
 let sequelize =
   // process.env.NODE_ENV === "production"
@@ -36,11 +37,12 @@ BookingsModel(sequelize);
 DogSittersModel(sequelize);
 DogsModel(sequelize);
 OwnersModel(sequelize);
+ReviewsModel(sequelize);
 
 LocationsModel(sequelize);
 AdminModel(sequelize)
 
-const { Bookings, DogSitters, Dogs, Owners, Locations, Admin } = sequelize.models;
+const { Bookings, DogSitters, Dogs, Owners, Locations, Admin, Reviews } = sequelize.models;
 
 //-------------------------------------------------------------------------------------------------
 // Owners And Dogs
@@ -62,6 +64,17 @@ Bookings.belongsTo(DogSitters, { foreignKey: "dogSitterId" });
 Owners.belongsToMany(DogSitters, { through: "Favorites", as: "favorites" });
 DogSitters.belongsToMany(Owners, { through: "Favorites" });
 
-module.exports = { sequelize, Bookings, DogSitters, Dogs, Owners, Locations, Admin };
+//-------------------------------------------------------------------------------------------------
+// Owners Dogsitters Review
+Reviews.belongsTo(DogSitters, { foreignKey: 'dogSitterId' }); // Una review pertenece a un cuidador
+Reviews.belongsTo(Owners, { foreignKey: 'ownerId' }); // Una review pertenece a un dueño
+
+//-------------------------------------------------------------------------------------------------
+// Owners Dogsitters Review
+DogSitters.hasMany(Reviews, { foreignKey: 'dogSitterId' }); // Un cuidador puede tener muchas reviews
+Owners.hasMany(Reviews, { foreignKey: 'ownerId' }); // Un dueño puede dejar muchas reviews
+
+
+module.exports = { sequelize, Bookings, DogSitters, Dogs, Owners, Locations, Admin, Reviews };
 
 
