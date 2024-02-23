@@ -9,10 +9,6 @@ module.exports = (sequelize) => {
         primaryKey: true,
         defaultValue: DataTypes.UUIDV4,
       },
-      startDate: {
-        type: DataTypes.STRING,
-        allowNull: true,
-      },
       status: {
         type: DataTypes.ENUM(
           "pendiente",
@@ -44,10 +40,6 @@ module.exports = (sequelize) => {
       },
       entryTime: {
         type: DataTypes.TIME,
-        allowNull: true
-      },
-      reservationsFor: {
-        type: DataTypes.UUID,
         allowNull: true
       },
       note: {
