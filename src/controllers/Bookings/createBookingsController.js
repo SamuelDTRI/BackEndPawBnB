@@ -2,7 +2,7 @@ const nodemailer = require("nodemailer");
 const { Bookings, Owners, DogSitters, Dogs } = require("../../db");
 
 const createBookingsController = async (
-  status, //s
+  {status, //s
   reviews, 
   rating,
   ownerId,
@@ -11,7 +11,7 @@ const createBookingsController = async (
   dateCheckIn,
   dateCheckOut,
   entryTime,
-  note
+  note}
 ) => {
   console.log(dogSitterId)
   const createBookings = await Bookings.create({
