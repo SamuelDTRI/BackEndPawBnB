@@ -18,8 +18,8 @@ const createSession = async (req, res) => {
       },
     ],
     mode: "payment",
-    success_url: "http://localhost:5173/PaySuccess",
-    cancel_url: "http://localhost:5173/payCancel",
+    success_url: "https://front-end-paw-bn-b.vercel.app/PaySuccess",
+    cancel_url: "https://front-end-paw-bn-b.vercel.app/payCancel",
   });
 
   return res.json(session);
