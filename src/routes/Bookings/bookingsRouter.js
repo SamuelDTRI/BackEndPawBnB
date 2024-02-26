@@ -17,6 +17,8 @@ const {
 const {
   updateBookingsDeletedHandler,
 } = require("../../handlers/Bookings/updateBookingsDeletedHandler");
+const { getBookingsByOwnerIdHandler 
+} = require("../../handlers/Bookings/getBookingByOwnerIdHandler");
 
 const bookingsRouter = Router();
 
@@ -24,6 +26,8 @@ bookingsRouter.get("/", getAllBookingsHandler); // todas las bookings
 //GET:http://localhost:3000/bookings
 bookingsRouter.get("/:id", getBookingsByIdHandler); // reserva por id
 //GET:http://localhost:3000/bookings/6eeed56c-ae60-4ca3-b7a3-c44ad064f9ba
+bookingsRouter.get("/owner/:id",getBookingsByOwnerIdHandler); //reservas de un propietario en especifico
+// GET: http://localhost:3000/bookings/owner/1234567890abcdefghi
 bookingsRouter.post("/", createBookingsHandler); // creacion de reserva
 //POST:http://localhost:3000/bookings
 //BODY: {"startDate": "Hoy","status": "pendiente","reviews": "Nada por ahora","rating": "4",
