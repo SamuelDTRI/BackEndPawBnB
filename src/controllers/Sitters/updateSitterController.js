@@ -131,7 +131,7 @@ const updateSitter = async ({
 
   let mailOptions = {
     from: "pawbnb45@gmail.com",
-    to: email,
+    to: updatedFields.email,
     subject: "Actualización de datos",
     html: `
       <h1>¡Hola ${name}!</h1>
