@@ -66,15 +66,11 @@ module.exports = (sequelize) => {
         defaultValue: "CABA"
       },
       rates: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
         allowNull: true,
       },
       photos: {
         type: DataTypes.ARRAY(DataTypes.JSON),
-        allowNull: true,
-      },
-      pay: {
-        type: DataTypes.STRING,
         allowNull: true,
       },
       deleted: {
