@@ -10,8 +10,8 @@ const AdminModel = require("./models/AdminModel.js");
 const ReviewsModel = require('./models/ReviewsModel.js');
 
 let sequelize =
-  process.env.NODE_ENV === "production"
-    ? new Sequelize({
+  // process.env.NODE_ENV === "production"
+     new Sequelize({
         database: "railway",
         username: "postgres",
         password: "bdaBGF66ffGg5ecB3**6B-Ag54EfAC4c",
@@ -27,11 +27,11 @@ let sequelize =
         logging: false,
         native: false,
       })
-    :
-  new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`, {
-    logging: false,
-    native: false,
-  });
+  //   :
+  // new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`, {
+  //   logging: false,
+  //   native: false,
+  // });
 
 BookingsModel(sequelize);
 DogSittersModel(sequelize);
