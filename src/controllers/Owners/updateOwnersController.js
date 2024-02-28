@@ -1,5 +1,6 @@
 const nodemailer = require("nodemailer");
 const { Owners } = require("../../db");
+const cloudinary = require("../../../cloudinary");
 
 const updateOwner = async (
   id,
@@ -19,22 +20,33 @@ const updateOwner = async (
     throw new Error("Usuario no encontrado.");
   }
   // actualizamos la información en la base de datos
-  await Owners.update(
-    {
-      name: name ? name : findOwner.name,
+  const updatedFields = {
+      name: name ? name : findOwner.name, 
       surName: surName ? surName : findOwner.surName,
       city: city ? city : findOwner.city,
       email: email ? email : findOwner.email,
       address: address ? address : findOwner.address,
       phone: phone ? phone : findOwner.phone,
       password: password ? password : findOwner.password,
-      photo: photo ? photo : findOwner.photo,
+      photo: findOwner.photo,
       neighborhood: neighborhood ? neighborhood : findOwner.neighborhood,
-    },
-    {
-      where: { id },
-    }
-  );
+  };
+
+   // Si envian una foto de perfil:
+  if (photo) {
+    const uploadedProfileImg = await cloudinary.uploader.upload(photo, {
+      upload_preset: "PawBnB_Profile",
+      public_id: `${name}_imgProfile`,
+      allowed_formats: ["png", "jpg", "jpeg", "svg", "ico", "jfif", "webp"],
+    });
+    updatedFields.photo = uploadedProfileImg.secure_url;
+  }
+
+  const ownerWithPhotoUpdated = await Owners.update(updatedFields, {
+    where: { id },
+  });
+  console.log("Cuidador actualizado:", ownerWithPhotoUpdated);
+
 
   const updatedOwner = await Owners.findOne({ where: { id } });
 
