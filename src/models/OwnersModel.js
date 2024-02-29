@@ -48,7 +48,7 @@ module.exports = (sequelize) => {
         allowNull: true,
       },
       photo: {
-        type: DataTypes.JSONB,
+        type: DataTypes.STRING,
         allowNull: true,
       },
       deleted: {
